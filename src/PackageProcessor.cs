@@ -33,6 +33,26 @@ namespace regex_test
             }
         }
 
+        public static int GetPackageInfos2(
+            ICollection<string> packages,
+            ICollection<Regex> categories)
+        {
+            var count = 0;
+
+            foreach (var category in categories)
+            {
+                foreach (var package in packages)
+                {
+                    if (category.IsMatch(package))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
         public static IList<Regex> GetPackageCategories(IEnumerable<string> packageFilters)
         {
             packageFilters = packageFilters ?? throw new ArgumentNullException(nameof(packageFilters));

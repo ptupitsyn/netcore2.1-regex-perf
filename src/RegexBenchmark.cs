@@ -18,7 +18,7 @@ namespace regex_test
         [Benchmark]
         public static void Benchmark()
         {
-            var count = PackageProcessor.GetPackageInfos(Packages, PackageCategories).Count();
+            var count = PackageProcessor.GetPackageInfos2(Packages, PackageCategories);
 
             if (count == 0)
             {
