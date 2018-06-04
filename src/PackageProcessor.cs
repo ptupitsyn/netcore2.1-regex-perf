@@ -55,27 +55,10 @@ namespace regex_test
 
         public static IList<Regex> GetPackageCategories(IEnumerable<string> packageFilters)
         {
-            packageFilters = packageFilters ?? throw new ArgumentNullException(nameof(packageFilters));
-
-            return packageFilters.SelectMany(GetPackageCategory).ToArray();
+            return packageFilters.Select(GetRegex).ToArray();
         }
 
-        private static Regex[] GetPackageCategory(string setting, int index)
-        {
-            return GetMatcher(setting);
-        }
-
-        private static Regex[] GetMatcher(string packageNames)
-        {
-            var matchers = packageNames
-                .Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => GetSingleMatcher(x.Trim()))
-                .ToArray();
-
-            return matchers;
-        }
-
-        private static Regex GetSingleMatcher(string packageName)
+        private static Regex GetRegex(string packageName)
         {
             var placeholder = Regex.Escape("[VERSION]");
             var pattern = Regex.Escape(packageName).Replace(placeholder, @"[\d\.-]*");
