@@ -6,8 +6,8 @@ namespace regex_test
     {
         static void Main()
         {
-            // BenchmarkRunner.Run<RegexBenchmark>();
-            RegexBenchmark.Test();
+             BenchmarkRunner.Run<RegexBenchmark>();
+            //RegexBenchmark.Test();
         }
     }
 }

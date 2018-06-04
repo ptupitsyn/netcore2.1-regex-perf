@@ -16,6 +16,16 @@ namespace regex_test
         private static readonly string[] Packages = PackageString.Split(",");
 
         [Benchmark]
+        public static void Benchmark()
+        {
+            var count = PackageProcessor.GetPackageInfos(Packages, PackageCategories).Count();
+
+            if (count == 0)
+            {
+                throw new Exception();
+            }
+        }
+
         public static void Test()
         {
             // Warmup.
