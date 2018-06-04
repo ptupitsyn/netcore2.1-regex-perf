@@ -7,24 +7,23 @@ namespace regex_test
 {
     public static class PackageProcessor
     {
-        public static IList<string> GetPackageInfos(
+        public static IEnumerable<string> GetPackageInfos(
             IEnumerable<string> packages,
             ICollection<Func<string, bool>> categories)
         {
             packages = packages ?? throw new ArgumentNullException(nameof(packages));
             categories = categories ?? throw new ArgumentNullException(nameof(categories));
 
-            return packages.Select(package =>
+            foreach (var package in packages)
             {
-                var cats = categories.Where(c => c(package)).ToArray();
-
-                if (cats.Any())
+                foreach (var category in categories)
                 {
-                    return package;
+                    if (category(package))
+                    {
+                        yield return package;
+                    }
                 }
-
-                return null;
-            }).ToArray();
+            }
         }
 
         public static IList<Func<string, bool>> GetPackageCategories(IEnumerable<string> packageFilters)

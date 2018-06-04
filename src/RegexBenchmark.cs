@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BenchmarkDotNet.Attributes;
 
 namespace regex_test
@@ -18,7 +19,11 @@ namespace regex_test
         [Benchmark]
         public static void Test()
         {
-            PackageProcessor.GetPackageInfos(Packages, PackageCategories);
+            var count = PackageProcessor.GetPackageInfos(Packages, PackageCategories).Count();
+            if (count < 0)
+            {
+                throw new Exception();
+            }
         }
     }
 }
