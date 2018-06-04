@@ -18,8 +18,20 @@ namespace regex_test
         [Benchmark]
         public static void Test()
         {
+            // Warmup.
+            for (int i = 0; i < 10; i++)
+            {
+                var count = PackageProcessor.GetPackageInfos(Packages, PackageCategories).Count();
+                if (count == 0)
+                {
+                    throw new Exception();
+                }
+            }
+
+            // Test.
             var stats = PackageProcessor.GetPackageInfos(Packages, PackageCategories)
-                .OrderByDescending(x => x.Item1);
+                .OrderByDescending(x => x.Item1)
+                .Take(15);
 
             foreach (var stat in stats)
             {
