@@ -39,9 +39,10 @@ namespace regex_test
         {
             var count = 0;
 
-            foreach (var category in categories)
+            // Reordering these loops makes a huge difference.
+            foreach (var package in packages)
             {
-                foreach (var package in packages)
+                foreach (var category in categories)
                 {
                     if (category.IsMatch(package))
                     {
