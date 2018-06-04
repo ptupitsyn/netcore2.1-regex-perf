@@ -21,14 +21,11 @@ namespace regex_test
                 var count = 0;
                 sw.Restart();
 
-                for (int i = 0; i < 10; i++)
+                foreach (var package in packages)
                 {
-                    foreach (var package in packages)
+                    if (category.IsMatch(package))
                     {
-                        if (category.IsMatch(package))
-                        {
-                            count++;
-                        }
+                        count++;
                     }
                 }
 
