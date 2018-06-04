@@ -19,7 +19,7 @@ namespace regex_test
         public static void Test()
         {
             // Warmup.
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var count = PackageProcessor.GetPackageInfos(Packages, PackageCategories).Count();
                 if (count == 0)
